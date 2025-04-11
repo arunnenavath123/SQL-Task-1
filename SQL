@@ -1,0 +1,64 @@
+-- Create the database
+CREATE DATABASE StudentManagement;
+
+-- Use the database
+USE StudentManagement;
+
+-- Create the Students table
+CREATE TABLE Students (
+    StudentID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50),
+    Gender VARCHAR(1),
+    Age INT,
+    Grade VARCHAR(10),
+    MathScore INT,
+    ScienceScore INT,
+    EnglishScore INT
+);
+
+-- Insert sample data
+INSERT INTO Students (Name, Gender, Age, Grade, MathScore, ScienceScore, EnglishScore) VALUES
+('Aarav', 'M', 15, 'A', 92, 85, 88),
+('Isha', 'F', 14, 'B', 78, 80, 85),
+('Rohan', 'M', 16, 'C', 65, 70, 60),
+('Anika', 'F', 15, 'A', 88, 90, 92),
+('Vikram', 'M', 14, 'B', 81, 77, 75),
+('Meera', 'F', 16, 'C', 68, 72, 70),
+('Dev', 'M', 15, 'A', 95, 89, 91),
+('Tanya', 'F', 15, 'B', 83, 86, 80),
+('Kunal', 'M', 14, 'B', 79, 73, 76),
+('Neha', 'F', 16, 'A', 90, 88, 87);
+
+-- 1. Display all students and their details
+SELECT * FROM Students;
+
+-- 2. Calculate the average scores for each subject
+SELECT 
+    AVG(MathScore) AS AvgMath,
+    AVG(ScienceScore) AS AvgScience,
+    AVG(EnglishScore) AS AvgEnglish
+FROM Students;
+
+-- 3. Find the student with the highest total score
+SELECT 
+    Name, 
+    (MathScore + ScienceScore + EnglishScore) AS TotalScore
+FROM Students
+ORDER BY TotalScore DESC
+LIMIT 1;
+
+-- 4. Count the number of students in each grade
+SELECT Grade, COUNT(*) AS StudentCount
+FROM Students
+GROUP BY Grade;
+
+-- 5. Find the average score for male and female students
+SELECT 
+    Gender,
+    AVG(MathScore) AS AvgMath,
+    AVG(ScienceScore) AS AvgScience,
+    AVG(EnglishScore) AS AvgEnglish
+FROM Students
+GROUP BY Gender;
+
+-- 6. Identify students whose Math score is above 80
